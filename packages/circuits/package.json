@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "pretest": "npm run compile",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint . --max-warnings 0",
     "precompile": "scripts/prerequisites.sh && mkdir -p out/circuits out/zkeys out/verifiers",
     "compile": "for circuit in src/*.circom; do circom $circuit --r1cs --wasm --sym --c -o out/circuits; done",
     "export:zkey": "for circuit in out/circuits/*.r1cs; do snarkjs groth16 setup $circuit powersOfTau28_hez_final_15.ptau out/zkeys/$(basename -- $circuit .r1cs).zkey; done",
@@ -13,5 +17,12 @@
   "dependencies": {
     "circom_tester": "^0.0.20",
     "circomlib": "^2.0.5"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@repo/eslint-config": "0.0.0",
+    "@repo/typescript-config": "0.0.0",
+    "@types/jest": "^29.5.10",
+    "ts-jest": "^29.1.1"
   }
 }

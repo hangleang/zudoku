@@ -4,5 +4,6 @@
     "outDir": "out"
   },
   "include": ["src"],
-  "exclude": ["node_modules", "out"]
+  "exclude": ["node_modules", "out"],
+  "files": ["jest.config.js"]
 }
