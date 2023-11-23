@@ -5,6 +5,10 @@ import "@nomiclabs/hardhat-solhint";
 import "hardhat-preprocessor";
 import "hardhat-contract-sizer";
 
+const DUMP_MNEMONIC = "test test test test test test test test test test test junk";
+// eslint-disable-next-line turbo/no-undeclared-env-vars
+const MNEMONIC = process.env.MNEMONIC || DUMP_MNEMONIC;
+
 function getRemappings() {
   return fs
     .readFileSync("remappings.txt", "utf8")
@@ -23,8 +27,22 @@ const config: HardhatUserConfig = {
       },
     },
   },
+  networks: {
+    sepolia: {
+      url: "https://rpc.sepolia.org/",
+      accounts: {
+        mnemonic: MNEMONIC,
+      },
+    },
+    mumbai: {
+      url: "https://rpc-mumbai.maticvigil.com",
+      accounts: {
+        mnemonic: MNEMONIC,
+      },
+    },
+  },
   preprocess: {
-    eachLine: () => ({
+    eachLine: (hre) => ({
       transform: (line: string) => {
         if (line.match(/^\s*import /i)) {
           for (const [from, to] of getRemappings()) {

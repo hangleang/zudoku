@@ -1,10 +1,12 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
 import { describe, before, it } from "mocha";
-import { exportCallDataGroth16 } from "../scripts/utils";
+import { exportCallDataGroth16 } from "./utils";
+import { Sudoku, SudokuVerifier } from "../typechain-types";
 
 describe("Sudoku", function () {
-  let sudokuVerifier, sudoku;
+  let sudokuVerifier: SudokuVerifier;
+  let sudoku: Sudoku;
 
   before(async function () {
     // deploy verifier contract
