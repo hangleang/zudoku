@@ -1,0 +1,17 @@
+{
+  "name": "@repo/circuits",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "precompile": "scripts/prerequisites.sh && mkdir -p out/circuits out/zkeys out/verifiers",
+    "compile": "for circuit in src/*.circom; do circom $circuit --r1cs --wasm --sym --c -o out/circuits; done",
+    "export:zkey": "for circuit in out/circuits/*.r1cs; do snarkjs groth16 setup $circuit powersOfTau28_hez_final_15.ptau out/zkeys/$(basename -- $circuit .r1cs).zkey; done",
+    "export:verifier": "for zkey in out/zkeys/*.zkey; do snarkjs zkey export solidityverifier $zkey out/verifiers/$(basename -- $zkey .zkey | perl -nE 'say ucfirst').sol; done",
+    "build": "npm run compile && npm run export:zkey && npm run export:verifier",
+    "generate_witness": "node out/circuits/sudoku_js/generate_witness.js out/circuits/sudoku_js/sudoku.wasm input.json out/circuits/sudoku_js/witness.wtns"
+  },
+  "dependencies": {
+    "circom_tester": "^0.0.20",
+    "circomlib": "^2.0.5"
+  }
+}
