@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
+    "deploy": "dotenv -- turbo run deploy",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "test": "turbo run test",
@@ -18,5 +19,8 @@
     "@repo/typescript-config": "0.0.0",
     "prettier": "^3.1.0",
     "turbo": "latest"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^7.3.0"
   }
 }
