@@ -41,8 +41,6 @@
     "sizes": "hardhat size-contracts",
     "build": "pnpm compile && pnpm sizes",
     "deploy": "hardhat run scripts/deploy.ts",
-    "deploy:sepolia": "hardhat run scripts/deploy.ts --network sepolia",
-    "deploy:mumbai": "hardhat run scripts/deploy.ts --network mumbai",
     "lint": "pnpm lint:sol && pnpm lint:ts && pnpm prettier:check",
     "lint:sol": "forge fmt && hardhat check",
     "lint:ts": "eslint . --max-warnings 0",

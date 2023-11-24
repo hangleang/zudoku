@@ -6,6 +6,10 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
+    "deploy": {
+      "env": ["MNEMONIC", "API_KEY_INFURA"],
+      "dependsOn": ["^build"]
+    },
     "lint": {
       "dependsOn": ["^lint"]
     },

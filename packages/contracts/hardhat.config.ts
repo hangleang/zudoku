@@ -6,8 +6,8 @@ import "hardhat-preprocessor";
 import "hardhat-contract-sizer";
 
 const DUMP_MNEMONIC = "test test test test test test test test test test test junk";
-// eslint-disable-next-line turbo/no-undeclared-env-vars
 const MNEMONIC = process.env.MNEMONIC || DUMP_MNEMONIC;
+const API_KEY_INFURA = process.env.API_KEY_INFURA;
 
 function getRemappings() {
   return fs
@@ -29,13 +29,13 @@ const config: HardhatUserConfig = {
   },
   networks: {
     sepolia: {
-      url: "https://rpc.sepolia.org/",
+      url: `https://sepolia.infura.io/v3/${API_KEY_INFURA}`,
       accounts: {
         mnemonic: MNEMONIC,
       },
     },
-    mumbai: {
-      url: "https://rpc-mumbai.maticvigil.com",
+    goerli: {
+      url: `https://goerli.infura.io/v3/${API_KEY_INFURA}`,
       accounts: {
         mnemonic: MNEMONIC,
       },
